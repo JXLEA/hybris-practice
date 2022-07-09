@@ -30,7 +30,23 @@
     <itemtypes>
 
         <!-- Add your item definitions here -->
+        <itemtype code="Engine" extends="Product" autocreate="true" generate="true" >
+            <attributes>
+                <attribute qualifier="type" type="java.lang.String">
+                    <modifiers read="true" write="true" removable="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
 
+        <itemtype code="Car" extends="Product" autocreate="true" generate="true" >
+            <attributes>
+                <attribute qualifier="engine" type="Engine">
+                    <modifiers read="true" write="true" removable="true" partof="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
 
         <!-- TypeGroups are for structure of this file only -->
 
@@ -86,6 +102,8 @@
                 </attributes>
             </itemtype>
         </typegroup>
+
+
 
         <typegroup name="Electronics">
             <itemtype code="ElectronicsColorVariantProduct" extends="VariantProduct"
