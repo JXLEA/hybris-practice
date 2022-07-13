@@ -11,8 +11,11 @@ $catalogVersion = catalogversion(catalog(id[default=$productCatalog]), version[d
 $supercategories = supercategories(code, $catalogVersion)
 $baseProduct = baseProduct(code, $catalogVersion)
 $approved = approvalstatus(code)[default='check']
-$engine = engine(code)
-# Insert Products
+
+
+INSERT_UPDATE Product; code[unique = true][cellDecorator = com.epam.training.core.decorator.ProductCodeDecorator]; $catalogVersion
+                     ; Test product                                                                              ; ;
+
 INSERT_UPDATE Engine; code[unique = true]; type; $catalogVersion; $approved
                     ; v8_engine          ; v8  ;                ;
 
