@@ -16,6 +16,8 @@ $approved = approvalstatus(code)[default='check']
 INSERT_UPDATE Product; code[unique = true][cellDecorator = com.epam.training.core.decorator.ProductCodeDecorator]; $catalogVersion
                      ; Test product                                                                              ; ;
 
+INSERT_UPDATE Engine; code[unique = true]; type; $catalogVersion; $approved
+                    ; v8_engine          ; v8  ;                ;
 
-# Insert Products
-INSERT_UPDATE Product; code[unique = true]; $supercategories; manufacturerName; manufacturerAID; unit(code); ean; variantType(code); $catalogVersion; $approved
+INSERT_UPDATE Car; code[unique = true]; $engine   ; $catalogVersion; $approved
+                 ; audi_a7            ; v8_engine ;                ;
