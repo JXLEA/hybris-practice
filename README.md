@@ -1,9 +1,13 @@
 # Hybris-training-course
 SAP Commerce Cloud (Hybirs) education practice
- - Models
- - Impes
+ - Data modeling
+ - Impex
  - Flexible Seach
- - Facede
+ - Facade
  - Service
+ - Event & Listener
+ - Action
+ - Business processes
+ - Dynamic attributes
  - Integration tests
  - ...
