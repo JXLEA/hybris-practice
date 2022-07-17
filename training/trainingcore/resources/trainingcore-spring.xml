@@ -364,6 +364,11 @@
         <property name="quoteService" ref="quoteService"/>
     </bean>
 
+	<bean id="defaultTrainingUserService"
+		  class="com.epam.training.core.service.impl.DefaultTrainingUserService"
+		  parent="userService">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
 	<!-- Simple Suggestion Service -->
 	<alias alias="simpleSuggestionService" name="defaultSimpleSuggestionService"/>
 	<bean id="defaultSimpleSuggestionService"
