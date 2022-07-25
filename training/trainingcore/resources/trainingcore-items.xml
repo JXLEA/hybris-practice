@@ -25,9 +25,34 @@
             <value code="WHITE"/>
             <value code="YELLOW"/>
         </enumtype>
+        
+        <enumtype code="ProductOption" autocreate="true" generate="true" dynamic="true">
+            <value code="PHYSICAL_DIMENSIONS"/>
+        </enumtype>
     </enumtypes>
 
     <itemtypes>
+
+        <itemtype code="Product" extends="Product" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="weight" type="java.lang.Double">
+                    <description>Milligrams</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="height" type="java.lang.Double">
+                    <description>Centimeters</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="length" type="java.lang.Double">
+                    <description>Centimeters</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="width" type="java.lang.Double">
+                    <description>Centimeters</description>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
 
         <!-- Add your item definitions here -->
         <itemtype code="Engine" extends="Product" autocreate="true" generate="true" >

@@ -30,6 +30,13 @@
 		</property>
 	</bean>
 
+	<bean id="trainingProductPopulator" class="com.epam.training.facades.populators.ProductConfigurablePopulator"/>
+
+	<bean id="trainingProductFacade" class="com.epam.training.facades.suggestion.impl.TrainingProductFacade">
+		<property name="productService" ref="productService"/>
+		<property name="productConfigurablePopulator" ref="trainingProductPopulator"/>
+	</bean>
+
 	<alias name="acceleratorVariantOptionDataConverter" alias="variantOptionDataConverter"/> 
 	<bean id="acceleratorVariantOptionDataConverter" parent="abstractPopulatingConverter">
 		<lookup-method name="createTarget" bean="variantOptionData"/>
