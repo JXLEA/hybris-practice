@@ -33,7 +33,7 @@
 
     <itemtypes>
 
-        <itemtype code="Product" extends="Product" autocreate="false" generate="false">
+        <itemtype code="Product" autocreate="false" generate="false">
             <attributes>
                 <attribute qualifier="weight" type="java.lang.Double">
                     <description>Milligrams</description>
