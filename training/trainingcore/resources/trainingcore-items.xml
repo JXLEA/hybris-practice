@@ -87,6 +87,18 @@
 
             </itemtype>
 
+            <itemtype code="ProductBundle" extends="Product" autocreate="true" generate="true">
+                <attributes>
+                    <attribute qualifier="products" type="ProductCollection">
+                        <modifiers read="true" write="true" search="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="totalPrice" type="java.math.BigDecimal">
+                        <persistence type="dynamic" attributeHandler="bundlePriceCalculator"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
             <itemtype code="ApparelSizeVariantProduct" extends="ApparelStyleVariantProduct"
                       autocreate="true" generate="true"
                       jaloclass="com.epam.training.core.jalo.ApparelSizeVariantProduct">
