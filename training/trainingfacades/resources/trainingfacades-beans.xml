@@ -20,4 +20,8 @@
 		<property name="length" type="java.lang.Double"/>
 		<property name="width" type="java.lang.Double"/>
 	</bean>
+
+	<enum class="de.hybris.platform.commercefacades.product.ProductOption">
+		<value>PHYSICAL_DIMENSIONS</value>
+	</enum>
 </beans>

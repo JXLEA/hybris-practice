@@ -1,9 +1,9 @@
 package com.epam.training.facades.suggestion.impl;
 
 
-import com.epam.training.core.enums.ProductOption;
 import com.epam.training.dto.ProductData;
 import de.hybris.bootstrap.annotations.IntegrationTest;
+import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.servicelayer.ServicelayerTransactionalTest;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,7 +27,7 @@ public class TrainingProductFacadeTest extends ServicelayerTransactionalTest {
 
     @Test
     public void whenProductOptionsWithoutDimensionsProductDataContainsOnlyCode() {
-        ProductData productDTO = trainingProductFacade.getProductForCodeAndOptions("camera1", List.of(ProductOption.valueOf("")));
+        ProductData productDTO = trainingProductFacade.getProductForCodeAndOptions("camera1", List.of(ProductOption.PRICE));
         Assert.assertNotNull(productDTO);
         Assert.assertEquals("camera1", productDTO.getCode());
         Assert.assertTrue(Objects.isNull(productDTO.getWeight()));

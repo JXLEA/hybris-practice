@@ -1,7 +1,7 @@
 package com.epam.training.facades.suggestion;
 
-import com.epam.training.core.enums.ProductOption;
 import com.epam.training.dto.ProductData;
+import de.hybris.platform.commercefacades.product.ProductOption;
 
 import java.util.Collection;
 

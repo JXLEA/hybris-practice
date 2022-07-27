@@ -25,10 +25,6 @@
             <value code="WHITE"/>
             <value code="YELLOW"/>
         </enumtype>
-        
-        <enumtype code="ProductOption" autocreate="true" generate="true" dynamic="true">
-            <value code="PHYSICAL_DIMENSIONS"/>
-        </enumtype>
     </enumtypes>
 
     <itemtypes>

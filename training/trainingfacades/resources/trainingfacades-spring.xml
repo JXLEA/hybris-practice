@@ -9,8 +9,8 @@
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
-		
-	<context:annotation-config/> 
+
+	<context:annotation-config/>
 
 	<alias alias="simpleSuggestionFacade" name="defaultSimpleSuggestionFacade"/>
 	<bean id="defaultSimpleSuggestionFacade" class="com.epam.training.facades.suggestion.impl.DefaultSimpleSuggestionFacade" >
@@ -21,7 +21,7 @@
 		<property name="productConverter" ref="carouselProductConverter"/>
 		<property name="cartService" ref="cartService"/>
 	</bean>
-	
+
 	<bean id="carouselProductConverter" parent="defaultProductConverter">
 		<property name="populators">
 			<list merge="true">
@@ -30,14 +30,32 @@
 		</property>
 	</bean>
 
-	<bean id="trainingProductPopulator" class="com.epam.training.facades.populators.ProductConfigurablePopulator"/>
+	<bean id="trainingDefaultProductPopulator" class="com.epam.training.facades.populators.DefaultProductPopulator"/>
+    <bean id="trainingProductConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.epam.training.dto.ProductData"/>
+		<property name="populators">
+			<list>
+				<ref bean="trainingDefaultProductPopulator"/>
+			</list>
+		</property>
+    </bean>
+
+	<bean id="trainingProductPopulator" class="com.epam.training.facades.populators.TrainingProductPopulator"/>
+	<bean id="trainingProductConfigurablePopulator" parent="abstractConfigurablePopulator">
+		<property name="populators">
+			<map key-type="de.hybris.platform.commercefacades.product.ProductOption" merge="true">
+				<entry key="PHYSICAL_DIMENSIONS" value-ref="trainingProductPopulator"/>
+			</map>
+		</property>
+	</bean>
 
 	<bean id="trainingProductFacade" class="com.epam.training.facades.suggestion.impl.TrainingProductFacade">
 		<property name="productService" ref="productService"/>
-		<property name="productConfigurablePopulator" ref="trainingProductPopulator"/>
+		<property name="productConfigurablePopulator" ref="trainingProductConfigurablePopulator"/>
+		<property name="converter" ref="trainingProductConverter"/>
 	</bean>
 
-	<alias name="acceleratorVariantOptionDataConverter" alias="variantOptionDataConverter"/> 
+	<alias name="acceleratorVariantOptionDataConverter" alias="variantOptionDataConverter"/>
 	<bean id="acceleratorVariantOptionDataConverter" parent="abstractPopulatingConverter">
 		<lookup-method name="createTarget" bean="variantOptionData"/>
 		<property name="populators">
@@ -62,7 +80,7 @@
 	</bean>
 
 
-	<alias name="acceleratorGenderConverter" alias="genderConverter"/> 
+	<alias name="acceleratorGenderConverter" alias="genderConverter"/>
 	<bean id="acceleratorGenderConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="com.epam.training.facades.product.data.GenderData"/>
 			<property name="populators">
@@ -143,19 +161,19 @@
 		<property name="quoteService" ref="quoteService"/>
 		<property name="quoteConverter" ref="quoteConverter"/>
 	</bean>
-	
+
 	<bean id="deliverySentEmailContext" class="com.epam.training.facades.process.email.context.DeliverySentEmailContext" parent="abstractEmailContext" scope="prototype" >
 		<property name="consignmentConverter" ref="consignmentConverter"/>
 	</bean>
-	
+
 	<bean id="readyForPickupEmailContext" class="com.epam.training.facades.process.email.context.ReadyForPickupEmailContext" parent="abstractEmailContext" scope="prototype" >
 		<property name="consignmentConverter" ref="consignmentConverter"/>
 	</bean>
-	
+
 	<bean id="orderCancelledEmailContext" class="com.epam.training.facades.process.email.context.OrderCancelledEmailContext" parent="abstractEmailContext" scope="prototype" >
 		<property name="orderConverter" ref="orderConverter"/>
 	</bean>
-	
+
 	<bean id="orderRefundEmailContext" class="com.epam.training.facades.process.email.context.OrderRefundEmailContext" parent="abstractEmailContext" scope="prototype" >
 		<property name="orderConverter" ref="orderConverter"/>
 	</bean>
@@ -169,7 +187,7 @@
 	<bean id="orderPartiallyModifiedEmailContext" class="com.epam.training.facades.process.email.context.OrderPartiallyModifiedEmailContext" parent="abstractEmailContext" scope="prototype" >
 		<property name="orderConverter" ref="orderConverter"/>
 		<property name="orderEntryConverter" ref="orderEntryConverter"/>
-		<property name="priceDataFactory" ref="priceDataFactory"/>		
+		<property name="priceDataFactory" ref="priceDataFactory"/>
 	</bean>
 
 	<bean id="orderPartiallyCanceledEmailContext" class="com.epam.training.facades.process.email.context.OrderPartiallyCanceledEmailContext" parent="orderPartiallyModifiedEmailContext" scope="prototype" >

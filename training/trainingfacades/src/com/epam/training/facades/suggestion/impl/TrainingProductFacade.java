@@ -1,25 +1,28 @@
 package com.epam.training.facades.suggestion.impl;
 
-import com.epam.training.core.enums.ProductOption;
 import com.epam.training.dto.ProductData;
-import com.epam.training.facades.populators.ProductConfigurablePopulator;
 import com.epam.training.facades.suggestion.ProductFacade;
+import de.hybris.platform.commercefacades.product.ProductOption;
+import de.hybris.platform.converters.ConfigurablePopulator;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.product.ProductService;
+import de.hybris.platform.servicelayer.dto.converter.Converter;
+import org.fest.util.Collections;
 
 import java.util.Collection;
 
 public class TrainingProductFacade implements ProductFacade {
 
     private ProductService productService;
-    private ProductConfigurablePopulator productConfigurablePopulator;
+    private ConfigurablePopulator<ProductModel, ProductData, ProductOption> productConfigurablePopulator;
+    private Converter<ProductModel, ProductData> converter;
 
     @Override
     public ProductData getProductForCodeAndOptions(String code, Collection<ProductOption> options) {
         ProductModel product = productService.getProductForCode(code);
-        ProductData productData = new ProductData();
-        productConfigurablePopulator.populate(product, productData, options);
-        return productData;
+        ProductData data = converter.convert(product);
+        productConfigurablePopulator.populate(product, data, Collections.list(ProductOption.PHYSICAL_DIMENSIONS));
+        return data;
     }
 
     public ProductService getProductService() {
@@ -30,11 +33,20 @@ public class TrainingProductFacade implements ProductFacade {
         this.productService = productService;
     }
 
-    public ProductConfigurablePopulator getProductConfigurablePopulator() {
+
+    public Converter<ProductModel, ProductData> getConverter() {
+        return converter;
+    }
+
+    public void setConverter(Converter<ProductModel, ProductData> converter) {
+        this.converter = converter;
+    }
+
+    public ConfigurablePopulator<ProductModel, ProductData, ProductOption> getProductConfigurablePopulator() {
         return productConfigurablePopulator;
     }
 
-    public void setProductConfigurablePopulator(ProductConfigurablePopulator productConfigurablePopulator) {
+    public void setProductConfigurablePopulator(ConfigurablePopulator<ProductModel, ProductData, ProductOption> productConfigurablePopulator) {
         this.productConfigurablePopulator = productConfigurablePopulator;
     }
 }
