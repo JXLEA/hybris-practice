@@ -34,6 +34,8 @@
         <property name="catalogVersionService" ref="catalogVersionService"/>
     </bean>
 
+	<bean id="bundlePriceCalculator" class="com.epam.training.core.dynamic.BundlePriceCalculator"/>
+
     <bean id="volumePriceComparator" class="com.epam.training.core.comparators.VolumeAwarePriceInformationComparator" scope="singleton"/>
 
     <bean id="productVolumePricesProvider" class="com.epam.training.core.search.solrfacetsearch.provider.impl.ProductVolumePricesProvider"  parent="abstractPropertyFieldValueProvider">
