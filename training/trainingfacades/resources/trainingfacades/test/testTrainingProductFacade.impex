@@ -1,0 +1,68 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+$catalog-id = testCatalog
+$catalog-version = Online
+
+$testCategory0-id = testCategory0
+$testCategory1-id = testCategory1
+
+$catalogversion = catalogversion(catalog(id[default='$catalog-id']), version[default='$catalog-version'])[unique=true, default='$catalog-id:$catalog-version']
+$supercategories = supercategories(code, $catalogversion);
+$prices = europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+
+$storeUid = testStore
+$siteUid = testSite
+$currencies = EUR
+$net = false
+$defaultCurrency = EUR
+$languages = en, de
+$defaultLanguage = en
+$vendor = test
+
+INSERT_UPDATE Language; isocode[unique = true]; active
+                      ; de                    ; true
+                      ; en                    ; true
+
+INSERT_UPDATE Unit; unitType[unique = true]; code[unique = true]; name[lang = de]; name[lang = en]; conversion;;;
+                  ; pieces                 ; pieces             ; pieces         ; pieces         ; 1
+
+INSERT_UPDATE Currency; isocode[unique = true]; name[lang = de]; name[lang = en]; active; base ; conversion; digits; symbol
+                      ; EUR                   ; Euro           ; Euro           ; true  ; true ; 1         ; 2     ; €
+
+INSERT_UPDATE UserTaxGroup; code[unique = true]
+                          ; de-taxes
+
+INSERT_UPDATE Title; code[unique = true]; name[lang = de]; name[lang = en]; ;
+                   ; dr                 ; Dr.            ; dr.            ; ;
+
+INSERT_UPDATE Country; isocode[unique = true]; name[lang = de]                ; name[lang = en]          ; active;
+                     ; US                    ; Vereinigte Staaten von Amerika ; United States of America ; true  ;
+
+INSERT_UPDATE UserGroup; uid[unique = true]; groups(uid);
+                       ; customergroup     ;
+
+INSERT_UPDATE Customer; uid[unique = true]; customerID  ; name       ; description; sessionLanguage(isocode); sessionCurrency(isocode); groups(uid)   ; password
+                      ; dejol             ; K2006-C0007 ; Max de Jol ;            ; en                      ; EUR                     ; customergroup ; 1234
+
+INSERT_UPDATE Catalog; id[unique = true]; defaultCatalog;
+                     ; $catalog-id      ; true
+
+INSERT_UPDATE CatalogVersion; catalog(id)[unique = true]; version[unique = true]; active;
+                            ; $catalog-id               ; $catalog-version      ; true  ;
+
+INSERT_UPDATE Category; code[unique = true]; $catalogversion; $supercategories
+                      ; cameras
+                      ; lenses
+                      ; tripods
+                      ; batteries
+                      ; others
+
+INSERT_UPDATE Product; code[unique = true]; name[lang = de]; name[lang = en]; unit(code); approvalStatus(code); width; height; width; length; $supercategories; $catalogversion
+                     ; camera1            ; camera1        ; camera1        ; pieces    ; approved            ; 5    ; 6     ; 7    ; 8     ; cameras         ;
+
+INSERT_UPDATE BaseStore; uid[unique = true]; catalogs(id); currencies(isocode); net  ; taxGroup(code); storelocatorDistanceUnit(code); defaultCurrency(isocode); languages(isocode); defaultLanguage(isocode); deliveryCountries(isocode); submitOrderProcessCode
+                       ; $storeUid         ; $catalog-id ; $currencies        ; $net ; de-taxes      ; km                            ; $defaultCurrency        ; $languages        ; $defaultLanguage        ;                           ;
+
+INSERT_UPDATE CMSSite; uid[unique = true]; theme(code); channel(code); stores(uid);
+                     ; $siteUid          ;            ;              ; $storeUid  ;

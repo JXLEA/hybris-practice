@@ -12,4 +12,16 @@
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
+
+	<bean class="com.epam.training.dto.ProductData">
+		<property name="code" type="java.lang.String"/>
+		<property name="weight" type="java.lang.Double"/>
+		<property name="height" type="java.lang.Double"/>
+		<property name="length" type="java.lang.Double"/>
+		<property name="width" type="java.lang.Double"/>
+	</bean>
+
+	<enum class="de.hybris.platform.commercefacades.product.ProductOption">
+		<value>PHYSICAL_DIMENSIONS</value>
+	</enum>
 </beans>
