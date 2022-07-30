@@ -389,7 +389,14 @@
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
 
+	<!-- Interceptors -->
+	<bean id="couponsRemoveInterceptor" class="com.epam.training.core.interceptors.CouponsRemoveInterceptor"/>
 
+	<bean id="couponsRemoveInterceptorMapping"
+		  class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="couponsRemoveInterceptor"/>
+		<property name="typeCode" value="Product"/>
+	</bean>
 
 	<!-- Product Reference Lookup Strategies-->
 	<alias name="apparelCrossSellingProductReferenceTargetStrategy" alias="crossSellingProductReferenceTargetStrategy"/>
