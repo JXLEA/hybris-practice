@@ -69,6 +69,25 @@
             </attributes>
         </itemtype>
 
+        <itemtype code="ImpexExcutorCronJob"
+                  jaloclass="de.hybris.platform.cronjob.jalo.ImpexExcutorCronJob"
+                  autocreate="true"
+                  generate="true"
+                  extends="CronJob">
+            <attributes>
+                <attribute qualifier="impexDir" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="processedDir" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="failedDir" type="java.lang.String">
+                <persistence type="property"/>
+            </attribute>
+            </attributes>
+        </itemtype>
+
+
         <!-- TypeGroups are for structure of this file only -->
 
         <typegroup name="Apparel">
