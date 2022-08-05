@@ -27,6 +27,18 @@
         </enumtype>
     </enumtypes>
 
+    <relations>
+        <relation code="AuthorsToBooks" localized="false">
+            <deployment table="AuthorsToBooks" typecode="11000"/>
+            <sourceElement type="Author" qualifier="author" cardinality="many" collectiontype="set">
+                <modifiers read="true" write="true" optional="true" removable="true" search="true"/>
+            </sourceElement>
+            <targetElement type="Book" qualifier="book" cardinality="many" collectiontype="set">
+                <modifiers read="true" write="true" optional="true" removable="true" search="true"/>
+            </targetElement>
+        </relation>
+    </relations>
+
     <itemtypes>
 
         <itemtype code="Product" autocreate="false" generate="false">
@@ -50,7 +62,42 @@
             </attributes>
         </itemtype>
 
-        <!-- Add your item definitions here -->
+        <itemtype code="Author" autocreate="true" generate="true">
+            <deployment table="Author" typecode="10999"/>
+            <attributes>
+                <attribute qualifier="name" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers removable="true" read="true" write="true" optional="true"/>
+                </attribute>
+                <attribute qualifier="dateOfBirthday" type="java.util.Date">
+                    <persistence type="property"/>
+                    <modifiers removable="true" read="true" write="true" optional="true"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="Book" autocreate="true" generate="true">
+            <deployment table="Book" typecode="10998"/>
+            <attributes>
+                <attribute qualifier="titel" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers removable="true" read="true" write="true" optional="true"/>
+                </attribute>
+                <attribute qualifier="cover" type="Media">
+                    <persistence type="property"/>
+                    <modifiers removable="true" read="true" write="true" optional="true"/>
+                </attribute>
+                <attribute qualifier="content" type="Media">
+                    <persistence type="property"/>
+                    <modifiers removable="true" read="true" write="true" optional="true"/>
+                </attribute>
+                <attribute qualifier="year" type="java.util.Date">
+                    <persistence type="property"/>
+                    <modifiers removable="true" read="true" write="true" optional="true"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
         <itemtype code="Engine" extends="Product" autocreate="true" generate="true" >
             <attributes>
                 <attribute qualifier="type" type="java.lang.String">
