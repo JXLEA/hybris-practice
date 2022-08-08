@@ -1,0 +1,2 @@
+INSERT_UPDATE ImpexExcutorCronJob; code[unique = true] ;      ;                                             ; processedDir                                             ; failedDir;
+                                 ; impxExcutorCronJob ;  ; "training/trainingcore/resources/trainingcore/test" ; "training/trainingcore/resources/trainingcore/processed/" ; "training/trainingcore/resources/trainingcore/failed/";
