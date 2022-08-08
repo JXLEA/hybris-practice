@@ -69,6 +69,25 @@
             </attributes>
         </itemtype>
 
+        <itemtype code="Supplier" autocreate="true" generate="true">
+            <deployment table="Suppliers" typecode="10995"/>
+            <attributes>
+                <attribute qualifier="catalogVersion" type="CatalogVersion">
+                    <description>CatalogVersion</description>
+                    <modifiers read="true" write="false" search="true" optional="false" unique="true" initial="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="name" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" removable="true" optional="true"/>
+                </attribute>
+                <attribute qualifier="description" type="java.lang.String">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" removable="true" optional="true"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
         <!-- TypeGroups are for structure of this file only -->
 
         <typegroup name="Apparel">
