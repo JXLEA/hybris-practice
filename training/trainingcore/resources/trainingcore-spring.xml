@@ -389,7 +389,14 @@
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
 
+	<!-- Interceptors -->
+	<bean id="couponsRemoveInterceptor" class="com.epam.training.core.interceptors.CouponsRemoveInterceptor"/>
 
+	<bean id="couponsRemoveInterceptorMapping"
+		  class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="couponsRemoveInterceptor"/>
+		<property name="typeCode" value="Product"/>
+	</bean>
 
 	<!-- Product Reference Lookup Strategies-->
 	<alias name="apparelCrossSellingProductReferenceTargetStrategy" alias="crossSellingProductReferenceTargetStrategy"/>
@@ -510,6 +517,12 @@
 		<property name="commerceQuoteDao" ref="commerceQuoteDao"/>
 		<property name="eventService" ref="eventService" />
 		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<bean id="impexExecutorJobPerformable"
+		  parent="abstractJobPerformable"
+		  class="com.epam.training.core.job.ImpexExecutorJobPerformable">
+		<property name="importService" ref="defaultImportService"/>
 	</bean>
 
 	<import resource="/trainingcore/processes/quote/quote-buyer-process-spring.xml"/>
