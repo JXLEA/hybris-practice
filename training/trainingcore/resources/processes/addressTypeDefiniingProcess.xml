@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<process xmlns="http://www.hybris.de/xsd/processdefinition" start="defineAddressType" name="addressTypeDefiningProcess"
+         processClass="de.hybris.platform.address.AddressTypeDefiningProcess">
+
+    <action id="defineAddressType" bean="defineAddressType">
+        <transition name="DELIVERY" to="shippingAddressType"/>
+        <transition name="BILLING" to="billingAddressType"/>
+    </action>
+
+    <action id="shippingAddressType" bean="shippingAddressType">
+        <transition name="OK" to="shippingAddressType"/>
+    </action>
+
+    <action id="billingAddressType" bean="defineAddressType">
+        <transition name="OK" to="shippingAddressType"/>
+    </action>
+
+    <end id="ok" state="SUCCEEDED">Address set up finished</end>
+</process>
