@@ -69,23 +69,55 @@
             </attributes>
         </itemtype>
 
-        <itemtype code="Supplier" autocreate="true" generate="true">
-            <deployment table="Suppliers" typecode="10995"/>
+        <itemtype code="Supplier"
+                  jaloclass="com.epam.training.Supplier"
+                  extends="GenericItem">
+            <deployment table="Suppliers" typecode="10991"/>
+            <custom-properties>
+                <property name="catalogItemType">
+                    <value>java.lang.Boolean.TRUE</value>
+                </property>
+                <property name="catalogVersionAttributeQualifier">
+                    <value>"catalogVersion"</value>
+                </property>
+                <property name="uniqueKeyAttributeQualifier">
+                    <value>"code"</value>
+                </property>
+                <property name="catalog.sync.default.root.type">
+                    <value>Boolean.TRUE</value>
+                </property>
+                <property name="catalog.sync.default.root.type.order">
+                    <value>Integer.valueOf(4)</value>
+                </property>
+            </custom-properties>
             <attributes>
-                <attribute qualifier="catalogVersion" type="CatalogVersion">
-                    <description>CatalogVersion</description>
-                    <modifiers read="true" write="false" search="true" optional="false" unique="true" initial="true"/>
+                <attribute qualifier="code" type="java.lang.String">
                     <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" optional="false" unique="true" initial="true"/>
                 </attribute>
                 <attribute qualifier="name" type="java.lang.String">
                     <persistence type="property"/>
-                    <modifiers read="true" write="true" search="true" removable="true" optional="true"/>
+                    <modifiers read="true" write="true" search="true"/>
                 </attribute>
                 <attribute qualifier="description" type="java.lang.String">
+                    <custom-properties>
+                        <property name="dontCopy">
+                            <value>java.lang.Boolean.TRUE</value>
+                        </property>
+                    </custom-properties>
                     <persistence type="property"/>
-                    <modifiers read="true" write="true" search="true" removable="true" optional="true"/>
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                </attribute>
+                <attribute qualifier="catalogVersion" type="CatalogVersion">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" optional="false" unique="true" initial="true"/>
+                </attribute>
+                <attribute qualifier="catalog" type="Catalog">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="false" search="true" optional="false" initial="true"/>
                 </attribute>
             </attributes>
+
         </itemtype>
 
         <!-- TypeGroups are for structure of this file only -->
@@ -154,7 +186,6 @@
                 </attributes>
             </itemtype>
         </typegroup>
-
 
 
         <typegroup name="Electronics">
