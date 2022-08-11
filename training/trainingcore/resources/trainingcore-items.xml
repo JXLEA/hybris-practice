@@ -27,6 +27,19 @@
         </enumtype>
     </enumtypes>
 
+    <relations>
+
+        <relation code="ProductToCoupons" autocreate="true" generate="true" localized="false">
+            <sourceElement qualifier="product" type="Product" cardinality="one">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+            <targetElement qualifier="coupons" type="Coupon" cardinality="many">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+        </relation>
+
+    </relations>
+
     <itemtypes>
 
         <itemtype code="Product" autocreate="false" generate="false">
@@ -51,7 +64,7 @@
         </itemtype>
 
         <!-- Add your item definitions here -->
-        <itemtype code="Engine" extends="Product" autocreate="true" generate="true" >
+        <itemtype code="Engine" extends="Product" autocreate="true" generate="true">
             <attributes>
                 <attribute qualifier="type" type="java.lang.String">
                     <modifiers read="true" write="true" removable="true"/>
@@ -60,7 +73,7 @@
             </attributes>
         </itemtype>
 
-        <itemtype code="Car" extends="Product" autocreate="true" generate="true" >
+        <itemtype code="Car" extends="Product" autocreate="true" generate="true">
             <attributes>
                 <attribute qualifier="engine" type="Engine">
                     <modifiers read="true" write="true" removable="true" partof="true"/>
@@ -120,7 +133,39 @@
 
         </itemtype>
 
-        <!-- TypeGroups are for structure of this file only -->
+        <itemtype code="ImpexExcutorCronJob"
+                  jaloclass="de.hybris.platform.cronjob.jalo.ImpexExcutorCronJob"
+                  autocreate="true"
+                  generate="true"
+                  extends="CronJob">
+            <attributes>
+                <attribute qualifier="impexDir" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="processedDir" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="failedDir" type="java.lang.String">
+                <persistence type="property"/>
+            </attribute>
+            </attributes>
+        </itemtype>
+
+
+
+        <itemtype code="Coupon" autocreate="true" generate="true">
+            <deployment table="Coupon" typecode="10199"/>
+            <attributes>
+                <attribute qualifier="code" type="java.lang.String">
+                    <modifiers read="true" write="true" removable="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="discount" type="java.lang.Integer">
+                    <modifiers read="true" write="true" removable="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
 
         <typegroup name="Apparel">
             <itemtype code="ApparelProduct" extends="Product"
