@@ -12,12 +12,8 @@ public class SetDefaultDeliveryAddressType extends AbstractProceduralAction<Addr
 
     @Override
     public void executeAction(AddressTypeDefiningProcessModel addressTypeDefiningProcessModel) throws Exception {
-        var address = addressService.createAddressForUser(addressTypeDefiningProcessModel.getUser());
-        address.setShippingAddress(Boolean.TRUE);
-        address.setFirstname("John");
-        address.setLastname("Doe");
-        address.setCompany("delivery_default");
-        modelService.save(address);
+        addressTypeDefiningProcessModel.getUser().setDefaultShipmentAddress(addressTypeDefiningProcessModel.getAddress());
+
     }
 
     public AddressService getAddressService() {

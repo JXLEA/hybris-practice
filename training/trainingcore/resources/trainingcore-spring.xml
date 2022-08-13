@@ -366,20 +366,6 @@
         <property name="quoteService" ref="quoteService"/>
     </bean>
 
-	<bean id="deliveryAddressType"
-		  class="com.epam.training.core.actions.SetDefaultDeliveryAddressType"
-		  abstract="true" parent="abstractAction">
-		<property name="modelService" ref="modelService"/>
-		<property name="addressService" ref="addressService"/>
-	</bean>
-
-	<bean id="billingAddressType"
-		  class="com.epam.training.core.actions.SetDefaultBillingAddressType"
-		  abstract="true" parent="abstractAction">
-		<property name="modelService" ref="modelService"/>
-		<property name="addressService" ref="addressService"/>
-	</bean>
-
 	<bean id="abstractDefineAddressType"
 		  class="com.epam.training.core.actions.AbstractDefineAddressTypeAction"
 		  abstract="true"
@@ -389,6 +375,20 @@
 	<bean id="defineAddressType"
 		  class="com.epam.training.core.actions.DefineAddressTypeAction"
 		  abstract="true" parent="abstractAction">
+	</bean>
+
+	<bean id="billingAddressType"
+		  class="com.epam.training.core.actions.SetDefaultBillingAddressType"
+		  abstract="true" parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+		<property name="addressService" ref="addressService"/>
+	</bean>
+
+	<bean id="deliveryAddressType"
+		  class="com.epam.training.core.actions.SetDefaultDeliveryAddressType"
+		  abstract="true" parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+		<property name="addressService" ref="addressService"/>
 	</bean>
 
     <bean id="testUserDao" parent="userDao" class="com.epam.training.core.dao.TestUserDaoImpl">
@@ -448,6 +448,7 @@
 		  parent="abstractEventListener">
 		<property name="modelService" ref="modelService"/>
 		<property name="businessProcessService" ref="businessProcessService"/>
+		<property name="addressService" ref="addressService"/>
 	</bean>
 
 	<bean id="quoteBuyerSubmitEventListener" class="com.epam.training.core.event.QuoteBuyerSubmitEventListener"

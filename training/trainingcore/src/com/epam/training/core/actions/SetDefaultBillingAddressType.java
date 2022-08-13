@@ -12,16 +12,7 @@ public class SetDefaultBillingAddressType extends AbstractProceduralAction<Addre
 
     @Override
     public void executeAction(AddressTypeDefiningProcessModel addressTypeDefiningProcessModel) throws Exception {
-        var address = addressService.createAddressForUser(addressTypeDefiningProcessModel.getUser());
-        address.setBillingAddress(Boolean.TRUE);
-        address.setFirstname("billing");
-        address.setLastname("biling");
-        address.setEmail("biiling@billing.com");
-        address.setAppartment("billing street");
-        address.setBuilding("billing building");
-        address.setEmail("biiling@billing.com");
-        address.setCompany("billing_default");
-        modelService.save(address);
+        addressTypeDefiningProcessModel.getUser().setDefaultPaymentAddress(addressTypeDefiningProcessModel.getAddress());
     }
 
     public AddressService getAddressService() {
