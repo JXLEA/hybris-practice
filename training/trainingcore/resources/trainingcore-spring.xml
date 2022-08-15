@@ -573,6 +573,7 @@
 		<property name="handledTypes">
 			<array>
 				<value>1</value>
+				<value>QUERY_CACHE</value>
 			</array>
 		</property>
 	</bean>
