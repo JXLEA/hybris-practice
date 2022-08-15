@@ -1,8 +1,9 @@
 package com.epam.training.core.event;
 
-import de.hybris.platform.address.AddressTypeDefiningProcessModel;
-import de.hybris.platform.impex.model.ImpExMediaModel;
+import de.hybris.platform.core.model.user.AddressModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.processengine.BusinessProcessService;
+import de.hybris.platform.processengine.model.address.AddressTypeDefiningProcessModel;
 import de.hybris.platform.servicelayer.event.events.AfterItemCreationEvent;
 import de.hybris.platform.servicelayer.event.impl.AbstractEventListener;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -10,21 +11,21 @@ import de.hybris.platform.servicelayer.user.AddressService;
 
 public class SavedAddressEventListener extends AbstractEventListener<AfterItemCreationEvent> {
 
-
     private ModelService modelService;
     private BusinessProcessService businessProcessService;
     private AddressService addressService;
 
     @Override
     protected void onEvent(AfterItemCreationEvent afterItemCreationEvent) {
-        var owner = ((ImpExMediaModel) modelService.getSource(afterItemCreationEvent.getId())).getOwner();
-        var address = addressService.getAddressesForOwner(owner).stream().findFirst();
-        if (address.isPresent()) {
+        var object = modelService.get(afterItemCreationEvent.getSource());
+        if (object instanceof AddressModel) {
+            var address = (AddressModel) object;
             AddressTypeDefiningProcessModel addressTypeDefiningProcessModel = getBusinessProcessService().createProcess(
-                    "addressTypeDefiningProcess-" + address.get() + "-" + System.currentTimeMillis(),
+                    "addressTypeDefiningProcess-" + address + "-" + System.currentTimeMillis(),
                     "addressTypeDefiningProcess");
 
-            addressTypeDefiningProcessModel.setUser(modelService.get(owner.getPk()));
+            addressTypeDefiningProcessModel.setUser((UserModel) address.getOwner());
+            addressTypeDefiningProcessModel.setAddress(address);
             getModelService().save(addressTypeDefiningProcessModel);
             getBusinessProcessService().startProcess(addressTypeDefiningProcessModel);
         }

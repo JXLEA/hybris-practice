@@ -1,7 +1,7 @@
 package com.epam.training.core.actions;
 
-import de.hybris.platform.address.AddressTypeDefiningProcessModel;
 import de.hybris.platform.processengine.action.AbstractProceduralAction;
+import de.hybris.platform.processengine.model.address.AddressTypeDefiningProcessModel;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.AddressService;
 
@@ -12,7 +12,9 @@ public class SetDefaultBillingAddressType extends AbstractProceduralAction<Addre
 
     @Override
     public void executeAction(AddressTypeDefiningProcessModel addressTypeDefiningProcessModel) throws Exception {
-        addressTypeDefiningProcessModel.getUser().setDefaultPaymentAddress(addressTypeDefiningProcessModel.getAddress());
+        var user = addressTypeDefiningProcessModel.getUser();
+        user.setDefaultPaymentAddress(addressTypeDefiningProcessModel.getAddress());
+        modelService.save(user);
     }
 
     public AddressService getAddressService() {

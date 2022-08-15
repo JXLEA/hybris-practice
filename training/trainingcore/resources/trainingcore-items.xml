@@ -116,7 +116,7 @@
         </itemtype>
 
         <itemtype code="AddressTypeDefiningProcess" autocreate="true" generate="true"
-                  jaloclass="de.hybris.platform.address.AddressTypeDefiningProcess"
+                  jaloclass="de.hybris.platform.processengine.address.AddressTypeDefiningProcess"
                   extends="BusinessProcess">
             <attributes>
                 <attribute qualifier="address" type="Address">

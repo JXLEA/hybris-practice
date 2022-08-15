@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <process xmlns="http://www.hybris.de/xsd/processdefinition" start="defineAddressType" name="addressTypeDefiningProcess"
-         processClass="de.hybris.platform.address.AddressTypeDefiningProcess">
+         processClass="de.hybris.platform.processengine.model.address.AddressTypeDefiningProcessModel">
 
     <action id="defineAddressType" bean="defineAddressType">
         <transition name="DELIVERY" to="shippingAddressType"/>

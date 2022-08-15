@@ -254,7 +254,10 @@
 	</bean>
 
 	<!-- Process resources definition -->
-
+	<bean id="addressTypeDefiningProcess"
+		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/trainingcore/processes/addressTypeDefiningProcess.xml"/>
+	</bean>
 	<bean id="customerRegistrationEmailProcessDefinitionResource"
 	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
 		<property name="resource" value="classpath:/trainingcore/processes/customerRegistrationEmailProcess.xml"/>
@@ -366,27 +369,22 @@
         <property name="quoteService" ref="quoteService"/>
     </bean>
 
-	<bean id="abstractDefineAddressType"
-		  class="com.epam.training.core.actions.AbstractDefineAddressTypeAction"
-		  abstract="true"
-		  parent="abstractAction">
-	</bean>
 
-	<bean id="defineAddressType"
+    <bean id="defineAddressType"
 		  class="com.epam.training.core.actions.DefineAddressTypeAction"
-		  abstract="true" parent="abstractAction">
+		  parent="abstractAction">
 	</bean>
 
 	<bean id="billingAddressType"
 		  class="com.epam.training.core.actions.SetDefaultBillingAddressType"
-		  abstract="true" parent="abstractAction">
+		  parent="abstractAction">
 		<property name="modelService" ref="modelService"/>
 		<property name="addressService" ref="addressService"/>
 	</bean>
 
 	<bean id="deliveryAddressType"
 		  class="com.epam.training.core.actions.SetDefaultDeliveryAddressType"
-		  abstract="true" parent="abstractAction">
+		  parent="abstractAction">
 		<property name="modelService" ref="modelService"/>
 		<property name="addressService" ref="addressService"/>
 	</bean>

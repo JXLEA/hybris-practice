@@ -1,7 +1,8 @@
 package com.epam.training.core.actions;
 
-import de.hybris.platform.address.AddressTypeDefiningProcessModel;
+
 import de.hybris.platform.processengine.action.AbstractAction;
+import de.hybris.platform.processengine.model.address.AddressTypeDefiningProcessModel;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -11,8 +12,8 @@ public class DefineAddressTypeAction extends AbstractAction<AddressTypeDefiningP
 
     @Override
     public String execute(AddressTypeDefiningProcessModel addressTypeDefiningProcessModel) throws Exception {
-        return addressTypeDefiningProcessModel.getAddress().getBillingAddress()
-                ? Transition.BILLING.toString() : Transition.DELIVERY.toString();
+        return addressTypeDefiningProcessModel.getAddress()
+                .getBillingAddress() ? Transition.BILLING.toString() : Transition.DELIVERY.toString();
     }
 
     @Override
