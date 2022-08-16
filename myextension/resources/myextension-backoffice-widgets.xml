@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+    <widget-extension widgetId="backofficeMainSlot">
+        <widget id="myextension-perspective" widgetDefinitionId="org.myextension.widgets.myextensionwidget"
+                template="false" slotId="perspectives" title="Hello myextension">
+            <setting key="perspectiveImageUrl" value="/cng/images/perspective.png"
+                     type="String"/>
+        </widget>
+    </widget-extension>
+
+</widgets>
