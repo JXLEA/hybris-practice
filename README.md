@@ -1,5 +1,5 @@
 # Hybris-training-course
-SAP Commerce Cloud (Hybirs) education practice
+SAP Commerce Cloud (Hybris) education practice
  - Data modeling
  - Impex
  - Flexible Seach
