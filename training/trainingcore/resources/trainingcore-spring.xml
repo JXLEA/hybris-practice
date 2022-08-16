@@ -525,6 +525,12 @@
 		<property name="importService" ref="defaultImportService"/>
 	</bean>
 
+	<bean id="transactionalImpexExecutorPerformable"
+		  parent="abstractJobPerformable"
+		  class="com.epam.training.core.job.transaction.TransactionalImpexExecutorPerformable">
+		<property name="importService" ref="defaultImportService"/>
+	</bean>
+
 	<import resource="/trainingcore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/trainingcore/processes/quote/quote-salesrep-process-spring.xml"/>
 	<import resource="/trainingcore/processes/quote/quote-seller-approval-process-spring.xml"/>
