@@ -7,7 +7,11 @@ SAP Commerce Cloud (Hybirs) education practice
  - Service
  - Event & Listener
  - Action
- - Business processes
+ - Business process
  - Dynamic attributes
+ - Validation
+ - Product Catalog Management (PCM)
+ - Transaction
+ - Cache
  - Integration tests
  - ...
