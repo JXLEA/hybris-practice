@@ -32,7 +32,6 @@ public class TransactionalImpexExecutorTest extends ServicelayerTransactionalTes
     @Resource
     private ImportService importService;
 
-    @Spy
     @InjectMocks
     private final TransactionalImpexExecutorPerformable job = new TransactionalImpexExecutorPerformable();
 
@@ -45,14 +44,14 @@ public class TransactionalImpexExecutorTest extends ServicelayerTransactionalTes
     public void shouldExecuteImpexSuccessfully() {
         var result = job.perform(getMockedJob("/Users/oleksii_nosovepam.com/Work/Development/hybris/hybris/bin/custom/training/trainingcore/resources/test/transactional/success/"));
         Assert.assertEquals(result.getResult().getCode(), CronJobResult.SUCCESS.toString());
-        //Assert.assertNotNull(userService.getUserForUID("ahertz"));
+        Assert.assertNotNull(userService.getUserForUID("ahertz"));
     }
 
     @Test
     public void shouldExecuteImpexWithErrorAndBeRolledBack() {
         var result = job.perform(getMockedJob("/Users/oleksii_nosovepam.com/Work/Development/hybris/hybris/bin/custom/training/trainingcore/resources/test/transactional/failure/"));
         Assert.assertEquals(result.getResult().getCode(), CronJobResult.FAILURE.toString());
-        //Assert.assertNull(userService.getUserForUID("ahertz"));
+        Assert.assertNull(userService.getUserForUID("ahertz"));
     }
 
     private ImpexExcutorCronJobModel getMockedJob(String path){

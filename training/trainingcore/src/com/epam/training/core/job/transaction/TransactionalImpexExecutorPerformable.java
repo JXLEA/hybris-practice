@@ -30,19 +30,23 @@ public class TransactionalImpexExecutorPerformable extends AbstractJobPerformabl
         var path = impexExcutorCronJob.getImpexDir();
         var result = new PerformResult(CronJobResult.FAILURE, CronJobStatus.FINISHED);
 
+        boolean success = false;
         Transaction transaction = Transaction.current();
         transaction.setRollbackOnCommitError(Boolean.TRUE);
         transaction.begin();
         try {
             var importResult = execute(path);
-            if (importResult.isError()) {
-                transaction.rollback();
-            } else if (importResult.isSuccessful()) {
-                transaction.commit();
+            if (importResult.isSuccessful()) {
+                success = true;
                 result = new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
             }
-        } catch (IOException e) {
-            transaction.rollback();
+        } catch (IOException ignored) {
+        } finally {
+            if (success) {
+                transaction.commit();
+            } else {
+                transaction.rollback();
+            }
         }
         return result;
     }
