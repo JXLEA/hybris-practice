@@ -2,8 +2,6 @@ $currencies = EUR
 $defaultCurrency = EUR
 $deliveryCountries = US
 
-
-$catalogversion = catalogversion(catalog(id), version)[unique=true, default=$catalog-id:$catalog-version];;;;;;;;;;;;;;;;;;;;;;
 $supercategories = supercategories(code, catalogversion(catalog(id[default=$catalog-id]), version[default=$catalog-version]));;;;;;;;;;;;;;;;;;;;;;
 
 INSERT_UPDATE Language; isocode[unique = true]; active
@@ -28,17 +26,5 @@ INSERT_UPDATE Country; isocode[unique = true]; name[lang = de]                ; 
 INSERT_UPDATE UserGroup; uid[unique = true]; groups(uid); ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
                        ; customergroup     ;            ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
 
-INSERT_UPDATE Customer; uid[unique = true]; customerID  ; name       ; description; sessionLanguage(isocode); sessionCurrency(isocode); groups(uid)   ; password; ; ; ; ; ; ; ; ; ; ; ; ; ;
-                      ; ahertz            ; K2006-C0005 ; Anja Hertz ;            ; en                      ; USD                     ; customergroup ; 1234    ; ; ; ; ; ; ; ; ; ; ; ; ; ;
-                      ; abrode            ; K2006-C0006 ; Arin Brode ;            ; en                      ; USD                     ; customergroup ; 1234    ; ; ; ; ; ; ; ; ; ; ; ; ; ;
-                      ; dejol             ; K2006-C0007 ; Max de Jol ;            ; en                      ; USD                     ; customergroup ; 1234    ; ; ; ; ; ; ; ; ; ; ; ; ; ;
-                      ; promoted          ; K2006-C0007 ; Max promo  ;            ; en                      ; EUR                     ; customergroup ; 1234    ; ; ; ; ; ; ; ; ; ; ; ; ; ;
-
-INSERT_UPDATE Address; owner(Customer.uid)[unique = true]; streetname[unique = true]; streetnumber[unique = true]; postalcode[unique = true]; duplicate[unique = true]; town   ; country(isocode); billingAddress; contactAddress; shippingAddress; unloadingAddress; firstname; lastname; email               ; gender(code); middlename; phone1; title(code); url; company     ; fax; department
-                     ; ahertz                            ; Zennerstrasse            ; 45                         ; 28277                    ; false                   ; Bremen ; DE              ; false         ; false         ; false          ; true            ; Anja     ; Hertz   ; ahertz@na-du.de     ; FEMALE      ;           ;       ;            ;    ; hybris GmbH ;    ;
-                     ; ahertz                            ; Schiller Allee           ; 8                          ; 28277                    ; false                   ; Bremen ; DE              ; true          ; true          ; true           ; false           ; Anja     ; Hertz   ; ahertz@na-du.de     ; FEMALE      ;           ;       ;            ;    ; hybris GmbH ;    ;
-                     ; abrode                            ; Feldweg                  ; 7                          ; 18551                    ; false                   ; Sagard ; DE              ; true          ; false         ; true           ; true            ; Arin     ; Brode   ; arin@wow-europe.com ; MALE        ;           ;       ;            ;    ; hybris GmbH ;    ;
-
-INSERT_UPDATE Customer; uid[unique = true]; defaultPaymentaddress(owner(Customer.uid), streetname, streetnumber, postalcode, duplicate); defaultShipmentAddress(owner(Customer.uid), streetname, streetnumber, postalcode, duplicate); ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
-                      ; ahertz            ; ahertz:Schiller Allee:8:28277:false                                                        ; ahertz:Zennerstrasse:45:28277:false                                                         ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
-                      ; abrode            ; abrode:Feldweg:7:18551:false                                                               ; abrode:Feldweg:7:18551:false                                                                ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
+INSE Customer; uid[unique = true]; customerID  ; name       ; description; sessionLanguage(isocode); sessionCurrency(isocode); groups(uid)   ; password; ; ; ; ; ; ; ; ; ; ; ; ; ;
+                      ; ahertz          ; K2006-C0007 ; Max promo  ;            ; en                      ; EUR                     ; customergroup ; 1234    ; ; ; ; ; ; ; ; ; ; ; ; ; ;

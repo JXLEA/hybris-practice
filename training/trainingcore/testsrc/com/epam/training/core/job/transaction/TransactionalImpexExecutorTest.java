@@ -1,62 +1,54 @@
 package com.epam.training.core.job.transaction;
 
+import com.epam.training.core.service.transaction.DefaultTransactionalImpexExecutorService;
 import de.hybris.bootstrap.annotations.IntegrationTest;
-import de.hybris.bootstrap.annotations.UnitTest;
-import de.hybris.platform.cronjob.enums.CronJobResult;
-import de.hybris.platform.cronjob.model.ImpexExcutorCronJobModel;
-import de.hybris.platform.jalo.JaloSystemException;
+import de.hybris.platform.servicelayer.ServicelayerTest;
 import de.hybris.platform.servicelayer.ServicelayerTransactionalTest;
+import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.impex.ImportService;
 import de.hybris.platform.servicelayer.user.UserService;
-import de.hybris.platform.testframework.HybrisJUnit4TransactionalTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Spy;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.core.annotation.Order;
 
 import javax.annotation.Resource;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 @IntegrationTest
-public class TransactionalImpexExecutorTest extends ServicelayerTransactionalTest {
+public class TransactionalImpexExecutorTest extends ServicelayerTest {
 
     @Resource
     private UserService userService;
 
     @Resource
-    private ImportService importService;
-
-    @InjectMocks
-    private final TransactionalImpexExecutorPerformable job = new TransactionalImpexExecutorPerformable();
+    private DefaultTransactionalImpexExecutorService defaultTransactionalImpexExecutorService;
 
     @Before
-    public void init() throws JaloSystemException {
-       job.setImportService(importService);
+    public void setUp() throws Exception {
+        createCoreData();
     }
 
-    @Test
-    public void shouldExecuteImpexSuccessfully() {
-        var result = job.perform(getMockedJob("/Users/oleksii_nosovepam.com/Work/Development/hybris/hybris/bin/custom/training/trainingcore/resources/test/transactional/success/"));
-        Assert.assertEquals(result.getResult().getCode(), CronJobResult.SUCCESS.toString());
-        Assert.assertNotNull(userService.getUserForUID("ahertz"));
+    @Order(1)
+    @Test(expected = UnknownIdentifierException.class)
+    public void shouldThrowUnknownIdentifierException() {
+        userService.getUserForUID("ahertz");
     }
 
-    @Test
-    public void shouldExecuteImpexWithErrorAndBeRolledBack() {
-        var result = job.perform(getMockedJob("/Users/oleksii_nosovepam.com/Work/Development/hybris/hybris/bin/custom/training/trainingcore/resources/test/transactional/failure/"));
-        Assert.assertEquals(result.getResult().getCode(), CronJobResult.FAILURE.toString());
+    @Order(2)
+    @Test(expected = UnknownIdentifierException.class)
+    public void shouldExecuteImpexWithExceptionAndRollBackTheResult() {
+        defaultTransactionalImpexExecutorService.setPath("/Users/oleksii_nosovepam.com/Work/Development/hybris/hybris/bin/custom/training/trainingcore/resources/test/transactional/failure/");
+        defaultTransactionalImpexExecutorService.perform();
         Assert.assertNull(userService.getUserForUID("ahertz"));
     }
 
-    private ImpexExcutorCronJobModel getMockedJob(String path){
-        ImpexExcutorCronJobModel cronJob = mock(ImpexExcutorCronJobModel.class);
-        when(cronJob.getImpexDir()).thenReturn(path);
-        return cronJob;
+    @Order(3)
+    @Test
+    public void shouldExecuteImpexSuccessfullyAndCommitTheResults() {
+        defaultTransactionalImpexExecutorService.setPath("/Users/oleksii_nosovepam.com/Work/Development/hybris/hybris/bin/custom/training/trainingcore/resources/test/transactional/success/");
+        defaultTransactionalImpexExecutorService.perform();
+        Assert.assertNotNull(userService.getUserForUID("ahertz"));
     }
+
+
 }

@@ -525,9 +525,8 @@
 		<property name="importService" ref="defaultImportService"/>
 	</bean>
 
-	<bean id="transactionalImpexExecutorPerformable"
-		  parent="abstractJobPerformable"
-		  class="com.epam.training.core.job.transaction.TransactionalImpexExecutorPerformable">
+	<bean id="defaultTransactionalImpexExecutorService"
+		  class="com.epam.training.core.service.transaction.DefaultTransactionalImpexExecutorService">
 		<property name="importService" ref="defaultImportService"/>
 	</bean>
 
