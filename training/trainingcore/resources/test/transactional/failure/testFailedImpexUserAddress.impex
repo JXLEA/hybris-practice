@@ -26,5 +26,5 @@ INSERT_UPDATE Country; isocode[unique = true]; name[lang = de]                ; 
 INSERT_UPDATE UserGroup; uid[unique = true]; groups(uid); ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
                        ; customergroup     ;            ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
 
-INSE Customer; uid[unique = true]; customerID  ; name       ; description; sessionLanguage(isocode); sessionCurrency(isocode); groups(uid)   ; password; ; ; ; ; ; ; ; ; ; ; ; ; ;
+INSERT_UPDATE Customer; uid[unique = true]; customerID  ; name       ; description; sessionLanguage(isocode); sessionCurrency(isocode); groups(uid)   ; password; ; ; ; ; ; ; ; ; ; ; ; ; ;
                       ; ahertz          ; K2006-C0007 ; Max promo  ;            ; en                      ; EUR                     ; customergroup ; 1234    ; ; ; ; ; ; ; ; ; ; ; ; ; ;
