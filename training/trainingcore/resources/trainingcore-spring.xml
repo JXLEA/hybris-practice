@@ -570,4 +570,16 @@
 		<property name="itemCleanupHooks" ref="csTicketRetentionHooks"/>
 		<property name="ticketBusinessService" ref="ticketBusinessService"/>
 	</bean>
+
+	<bean name="productCacheRegion" class="de.hybris.platform.regioncache.region.impl.EHCacheRegion">
+		<constructor-arg name="name" value="productCacheRegion" />
+		<constructor-arg name="maxEntries" value="${cache.size}" />
+		<constructor-arg name="evictionPolicy" value="${cache.eviction}" />
+		<property name="handledTypes">
+			<array>
+				<value>1</value>
+				<value>QUERY_CACHE</value>
+			</array>
+		</property>
+	</bean>
 </beans>
