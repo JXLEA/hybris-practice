@@ -1,0 +1,30 @@
+$currencies = EUR
+$defaultCurrency = EUR
+$deliveryCountries = US
+
+$supercategories = supercategories(code, catalogversion(catalog(id[default=$catalog-id]), version[default=$catalog-version]));;;;;;;;;;;;;;;;;;;;;;
+
+INSERT_UPDATE Language; isocode[unique = true]; active
+                      ; de                    ; true
+                      ; en                    ; true
+
+INSERT_UPDATE Unit; unitType[unique = true]; code[unique = true]; name[lang = de]; name[lang = en]; conversion
+                  ; pieces                 ; pieces             ; pieces         ; pieces         ; 1
+
+INSERT_UPDATE Currency; isocode[unique = true]; name[lang = de]; name[lang = en]; active; base  ; conversion; digits; symbol;;;;;;;;;;;;;;
+                      ; EUR                   ; Euro           ; Euro           ; true  ; true  ; 1         ; 2     ; E
+                      ; USD                   ; US-Dollar      ; US Dollar      ; true  ; false ; 1,38      ; 2     ; $
+
+INSERT_UPDATE Title; code[unique = true]; name[lang = de]; name[lang = en]; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
+                   ; dr                 ; Dr.            ; dr.            ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
+                   ; prof               ; Prof.          ; prof.          ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
+
+INSERT_UPDATE Country; isocode[unique = true]; name[lang = de]                ; name[lang = en]          ; active; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
+                     ; DE                    ; Deutschland                    ; Germany                  ; true  ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
+                     ; US                    ; Vereinigte Staaten von Amerika ; United States of America ; true  ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
+
+INSERT_UPDATE UserGroup; uid[unique = true]; groups(uid); ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
+                       ; customergroup     ;            ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
+
+INSERT_UPDATE Customer; uid[unique = true]; customerID  ; name       ; description; sessionLanguage(isocode); sessionCurrency(isocode); groups(uid)   ; password; ; ; ; ; ; ; ; ; ; ; ; ; ;
+                      ; ahertz          ; K2006-C0007 ; Max promo  ;            ; en                      ; EUR                     ; customergroup ; 1234    ; ; ; ; ; ; ; ; ; ; ; ; ; ;
