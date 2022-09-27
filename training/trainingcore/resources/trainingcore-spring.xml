@@ -254,7 +254,10 @@
 	</bean>
 
 	<!-- Process resources definition -->
-
+	<bean id="addressTypeDefiningProcess"
+		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/trainingcore/processes/addressTypeDefiningProcess.xml"/>
+	</bean>
 	<bean id="customerRegistrationEmailProcessDefinitionResource"
 	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
 		<property name="resource" value="classpath:/trainingcore/processes/customerRegistrationEmailProcess.xml"/>
@@ -366,6 +369,26 @@
         <property name="quoteService" ref="quoteService"/>
     </bean>
 
+
+    <bean id="defineAddressType"
+		  class="com.epam.training.core.actions.DefineAddressTypeAction"
+		  parent="abstractAction">
+	</bean>
+
+	<bean id="billingAddressType"
+		  class="com.epam.training.core.actions.SetDefaultBillingAddressType"
+		  parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+		<property name="addressService" ref="addressService"/>
+	</bean>
+
+	<bean id="deliveryAddressType"
+		  class="com.epam.training.core.actions.SetDefaultDeliveryAddressType"
+		  parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+		<property name="addressService" ref="addressService"/>
+	</bean>
+
     <bean id="testUserDao" parent="userDao" class="com.epam.training.core.dao.TestUserDaoImpl">
         <property name="flexibleSearchService" ref="flexibleSearchService"/>
     </bean>
@@ -418,6 +441,14 @@
 	<!-- Sales quote process actions -->
 
 	<!-- quote-->
+	<bean id="savedAddressEventListener"
+		  class="com.epam.training.core.event.SavedAddressEventListener"
+		  parent="abstractEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+		<property name="addressService" ref="addressService"/>
+	</bean>
+
 	<bean id="quoteBuyerSubmitEventListener" class="com.epam.training.core.event.QuoteBuyerSubmitEventListener"
 		  parent="abstractEventListener">
 		<property name="modelService" ref="modelService"/>

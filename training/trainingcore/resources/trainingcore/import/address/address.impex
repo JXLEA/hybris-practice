@@ -1,0 +1,5 @@
+INSERT_UPDATE Customer; originalUid[unique = true]; uid[unique = true]; title(code); name; description      ; sessionLanguage(isocode); sessionCurrency(isocode); groups(uid)   ; customerId
+                      ; zn@customer.com           ; zn@customer.com   ; mr         ; an  ; Ticket collector ; en                      ; USD                     ; customergroup ; 999223
+
+INSERT_UPDATE Address; owner(customer.uid)[unique = true]; streetname[unique = true]; postalcode[unique = true]; duplicate[unique = true]; town     ; country(isocode); billingAddress; contactAddress; shippingAddress; unloadingAddress; firstname; lastname; email         ; gender(code); middlename; phone1           ; title(code); url; company; fax; department
+              ; 23423423                             ; 10 Yamashita-cho         ; 231-8540                 ; false                   ; Yokohama ; JP              ; true          ; false         ; false          ; false           ; Zohan    ; Agent   ; llx@gmail.com ; MALE        ;           ; +48 32 44 00 810 ; mr         ;    ; Hybris ;    ;

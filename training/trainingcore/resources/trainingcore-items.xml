@@ -189,10 +189,11 @@
                     <persistence type="property"/>
                 </attribute>
                 <attribute qualifier="failedDir" type="java.lang.String">
-                <persistence type="property"/>
-            </attribute>
+                    <persistence type="property"/>
+                </attribute>
             </attributes>
         </itemtype>
+
 
         <itemtype code="Customer" extends="Customer" autocreate="false" generate="true">
             <attributes>
@@ -215,6 +216,17 @@
                     <persistence type="property"/>
                 </attribute>
             </attributes>
+        </itemtype>
+
+        <itemtype code="AddressTypeDefiningProcess" autocreate="true" generate="true"
+                  jaloclass="de.hybris.platform.processengine.address.AddressTypeDefiningProcess"
+                  extends="BusinessProcess">
+            <attributes>
+                <attribute qualifier="address" type="Address">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" optional="true"/>
+                </attribute>
+            </attributes>a
         </itemtype>
 
         <typegroup name="Apparel">
