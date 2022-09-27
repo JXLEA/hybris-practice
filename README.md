@@ -1,5 +1,5 @@
-# Hybris-training-course
-SAP Commerce Cloud (Hybris) education practice
+# Hybris-Self-education-training
+SAP Commerce Cloud (Hybris) education practice, themes:
  - Data modeling
  - Impex
  - Flexible Seach
