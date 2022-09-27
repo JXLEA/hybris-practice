@@ -556,6 +556,11 @@
 		<property name="importService" ref="defaultImportService"/>
 	</bean>
 
+	<bean id="defaultTransactionalImpexExecutorService"
+		  class="com.epam.training.core.service.transaction.DefaultTransactionalImpexExecutorService">
+		<property name="importService" ref="defaultImportService"/>
+	</bean>
+
 	<import resource="/trainingcore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/trainingcore/processes/quote/quote-salesrep-process-spring.xml"/>
 	<import resource="/trainingcore/processes/quote/quote-seller-approval-process-spring.xml"/>
@@ -595,5 +600,17 @@
 	<bean id="defaultCSTicketStagnationAction" class="com.epam.training.core.retention.impl.DefaultCSTicketStagnationAction" parent="abstractExtensibleRemoveCleanupAction">
 		<property name="itemCleanupHooks" ref="csTicketRetentionHooks"/>
 		<property name="ticketBusinessService" ref="ticketBusinessService"/>
+	</bean>
+
+	<bean name="productCacheRegion" class="de.hybris.platform.regioncache.region.impl.EHCacheRegion">
+		<constructor-arg name="name" value="productCacheRegion" />
+		<constructor-arg name="maxEntries" value="${cache.size}" />
+		<constructor-arg name="evictionPolicy" value="${cache.eviction}" />
+		<property name="handledTypes">
+			<array>
+				<value>1</value>
+				<value>QUERY_CACHE</value>
+			</array>
+		</property>
 	</bean>
 </beans>
